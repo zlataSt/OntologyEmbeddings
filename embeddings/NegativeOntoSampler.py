@@ -99,3 +99,4 @@ def GeneralizedSamples(beta, G, O, num_samples):
             predicate = random.choice(list(predicates_G.union(predicates_O).union(set([beta[1]]))))
 
         # Выбираем случайную сущность, которая не связана с o' в G и O
+        predicates_O.difference_update(self, s="")

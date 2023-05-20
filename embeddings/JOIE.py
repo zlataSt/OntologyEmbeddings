@@ -240,20 +240,6 @@ class BaseCrossViewModel(nn.Module):
         return pos, neg
 
     def scoring_function(self, h_idx, t_idx, r_idx):
-        """Compute the scoring function for the triplets given as argument.
-        Parameters
-        ----------
-        h_idx: torch.Tensor, dtype: torch.long, shape: (b_size)
-            Integer keys of the current batch's heads
-        t_idx: torch.Tensor, dtype: torch.long, shape: (b_size)
-            Integer keys of the current batch's tails.
-        r_idx: torch.Tensor, dtype: torch.long, shape: (b_size)
-            Integer keys of the current batch's relations.
-        Returns
-        -------
-        score: torch.Tensor, dtype: torch.float, shape: (b_size)
-            Score of each triplet.
-        """
         raise NotImplementedError
 
     def get_embeddings(self):
@@ -291,15 +277,6 @@ class BaseCrossViewModel(nn.Module):
 
 
 class CrossViewGroupping(BaseCrossViewModel):
-    """Description.
-    
-    Parameters
-    ----------
-    
-    Attributes
-    ----------
-    
-    """
 
     def __init__(self, n_entities, n_concepts, entity_dim, concept_dim, p=2):
         super().__init__(n_entities, n_concepts, entity_dim, concept_dim, p)

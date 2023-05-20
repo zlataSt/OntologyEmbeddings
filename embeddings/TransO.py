@@ -1,5 +1,4 @@
 import torch
-from torchkge import KnowledgeGraph
 from torchkge.utils import MarginLoss
 
 # Define the TransO model class
@@ -64,7 +63,7 @@ class TransO(torch.nn.Module):
         return loss
 
 # Define the training function
-def train_transo(kg, embedding_dim, num_epochs, batch_size, learning_rate, gamma_1, gamma_2):
+def train_transo(kg, embedding_dim, num_epochs, batch_size, learning_rate):
     # Create the TransO model
     model = TransO(kg, embedding_dim)
 

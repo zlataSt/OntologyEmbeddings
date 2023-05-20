@@ -5,15 +5,24 @@ from torchkge.models import TransEModel
 from torchkge.utils import DataLoader
 from torchkge.utils import MarginLoss
 
+from embeddings.NegativeOntoSampler import is_consistent, get_explanations
+
+
 class Ontology:
-    def __init__(self):
-        pass
+    def __init__(self, triplets):
+        self.triplets = triplets
 
     def check_consistency(self, triplets):
-        pass
-
+        return is_consistent(triplets, [])
     def generate_explanations(self, incompatible_triplet):
-        pass
+        # Get all possible explanations for the incompatible triplet
+        explanations = get_explanations([incompatible_triplet], self.O)
+
+        # Format the explanations as strings and return them
+        explanation_strings = []
+        for e in explanations:
+            explanation_strings.append(f"{e[0][0]} {e[0][1]} {e[0][2]} is incompatible with {e[1][0]} {e[1][1]} {e[1][2]}")
+        return explanation_strings
 
 class KnowledgeGraph:
     def __init__(self, triplets):
@@ -33,10 +42,6 @@ class NegativeSampler:
         self.criterion = MarginLoss(margin=1.0)
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
         self.sampler = NegativeSampler(ontology, knowledge_graph)
-
-    def get_neg_samples(self, batch):
-        pass
-
     def train(self, num_epochs, batch_size):
         for epoch in range(num_epochs):
             for batch in DataLoader(self.knowledge_graph.triplets + self.sampler.get_neg_samples(batch), batch_size=batch_size, shuffle=True):
@@ -46,9 +51,6 @@ class NegativeSampler:
                 )
                 loss.backward()
                 self.optimizer.step()
-
-# Step 1: Train base embedding model E
-# Define your base embedding model here using the torchkge library
 E = torchkge.models.TransEModel(emb_dim=50, n_entities=100, n_relations=10)
 
 # Define your training data here
