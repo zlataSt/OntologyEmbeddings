@@ -13,9 +13,9 @@ https://github.com/nitishajain/ReasonKGE (ReasonKGE Negative Sampling procedure)
 * JOIE Cross-View Transformtaion model (with / without Hierarchy-Aware part) <br>
 * TransO model <br>
 #### Base models include:
-* TransE <br> (JOIE / TransO)
-* DistMult <br> (JOIE)
-* HolE <br> (JOIE)
+* TransE (JOIE / TransO) <br>
+* DistMult (JOIE) <br>
+* HolE (JOIE) <br>
 #### Each model can be run with the one of the following Negative Sampling Techniques: 
 * Uniform Random <br>
 * Bernoulli Random <br>
